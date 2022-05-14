@@ -1,0 +1,255 @@
+200: OPERACIÓN EXITOSA
+
+*** REGISTRO ***
+DOCTORES:
+POST http://localhost:3005/api/doctores/registro
+{
+    "nombre": "hola",
+    "correo": "prueba@prueba.com",
+    "cedula": "abc",
+    "password": "123"
+}
+
+PACIENTES:
+POST http://localhost:3005/api/pacientes/registro
+{
+    "nombre": "hola",
+    "correo": "prueba@prueba.com",
+    "password": "123"
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** LOGIN ***
+DOCTORES:
+POST http://localhost:3005/api/doctores/login
+{
+    "correo": "prueba@prueba.com",
+    "password": "123"
+}
+
+PACIENTES:
+POST http://localhost:3005/api/pacientes/login
+{
+    "correo": "prueba@prueba.com",
+    "password": "123"
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** CONSULTAS ***
+CREAR:
+POST http://localhost:3005/api/consultas
+{
+    "fecha": "2020-01-01",
+    "hora": "12:00",
+    "link": "http://hola.com/consulta/1",
+    "idDoctor": 1,
+    "idPaciente": 1
+}
+
+OBTENER:
+GET http://localhost:3005/api/consultas
+CONSULTAS DE UN DOCTOR:
+{
+    "esDoctor": true,
+    "idDoctor": 1
+}
+CONSULTAS DE UN PACIENTE:
+{
+    "esDoctor": false,
+    "idPaciente": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/consultas
+{
+    "id_consulta": 1
+}
+
+ACTUALIZAR / MODIFICAR CONSULTA:
+POST http://localhost:3005/api/consultas/actualizar
+{
+    "id_consulta": 1,
+    "fecha": "2022-12-12",
+    "hora": "15:00",
+    "link": "http://hola.com/consulta/5"
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** RECETAS ***
+CREAR:
+POST http://localhost:3005/api/recetas
+{
+    "fecha": "2020-01-01",
+    "datos": "Juan Perez",
+    "prescripcion": "Paracetamol",
+    "idDoctor": 1,
+    "idPaciente": 1
+}
+
+OBTENER:
+GET http://localhost:3005/api/recetas
+RECETAS DE UN DOCTOR:
+{
+    "esDoctor": true,
+    "idDoctor": 1
+}
+RECETAS DE UN PACIENTE:
+{
+    "esDoctor": false,
+    "idPaciente": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/recetas
+{
+    "id_receta": 1
+}
+
+ACTUALIZAR / MODIFICAR RECETA:
+POST http://localhost:3005/api/recetas/actualizar
+{
+    "id_receta": 1,
+    "fecha": "2022-12-12",
+    "datos": "Juan Perez",
+    "prescripcion": "Tylenol"
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** PAGOS ***
+CREAR:
+POST http://localhost:3005/api/pagos
+{
+    "fecha": "2020-01-01",
+    "monto": 100
+    "idDoctor": 1,
+    "idPaciente": 1
+}
+
+OBTENER:
+GET http://localhost:3005/api/pagos
+PAGOS DE UN DOCTOR:
+{
+    "esDoctor": true,
+    "idDoctor": 1
+}
+PAGOS DE UN PACIENTE:
+{
+    "esDoctor": false,
+    "idPaciente": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/pagos
+{
+    "id_pago": 1
+}
+
+ACTUALIZAR / MODIFICAR RECETA:
+POST http://localhost:3005/api/pagos/actualizar
+{
+    "id_pago": 1,
+    "fecha": "2022-12-12",
+    "monto": 500
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** FAVORITOS ***
+CREAR:
+POST http://localhost:3005/api/favoritos
+{
+    "idDoctor": 1,
+    "idPaciente": 1
+}
+
+OBTENER:
+GET http://localhost:3005/api/favoritos
+PAGOS DE UN DOCTOR:
+{
+    "esDoctor": true,
+    "idDoctor": 1
+}
+PAGOS DE UN PACIENTE:
+{
+    "esDoctor": false,
+    "idPaciente": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/favoritos
+{
+    "id_favorito": 1
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** MENSAJES ***
+CREAR:
+POST http://localhost:3005/api/mensajes
+{
+    "idDoctor": 1,
+    "idPaciente": 1,
+    "mensaje": "Hola"
+    "fecha": "2020-01-01",
+    "hora": "12:00"
+}
+
+OBTENER:
+GET http://localhost:3005/api/mensajes
+MENSAJES DE UN DOCTOR:
+{
+    "esDoctor": true,
+    "idDoctor": 1
+}
+MENSAJES DE UN PACIENTE:
+{
+    "esDoctor": false,
+    "idPaciente": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/mensajes
+{
+    "id_mensaje": 1
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** CUENTAS DOCTORES ***
+CREAR:
+POST http://localhost:3005/api/cuentasdoctores
+{
+    "idDoctor": 1,
+    "saldo": 1000
+    "gananciasTot": 2000
+}
+
+OBTENER:
+GET http://localhost:3005/api/cuentasdoctores
+{
+    "idDoctor": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/cuentasdoctores
+{
+    "id_cuenta": 1
+}
