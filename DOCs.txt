@@ -253,3 +253,97 @@ DELETE http://localhost:3005/api/cuentasdoctores
 {
     "id_cuenta": 1
 }
+
+
+----------------------------------------------------------------------------
+
+
+*** INFORMACION DOCTORES ***
+POST http://localhost:3005/api/infodoctores
+CREAR:
+{
+    "idDoctor": 1,
+    "nombreC": "Juan",
+    "identificacion": "C:\\Users\\Juan\\Desktop\\identificacion.jpg",
+    "firma": "C:\\Users\\Juan\\Desktop\\firma.jpg",
+    "sexo": 1,
+    "fechaNac": "2020-01-01",
+    "foto": "C:\\Users\\Juan\\Desktop\\foto.jpg",
+    "especialidad": "Cardiologia",
+    "horario": "Matutino",
+    "precioCons": 100,
+    "direccionCons": "Calle falsa 123",
+    "Descripcion": "Especialista en cardiologia"
+}
+
+OBTENER:
+GET http://localhost:3005/api/infodoctores
+{
+    "idDoctor": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/infodoctores
+{
+    "idDoctor": 1
+}
+
+ACTUALIZAR:
+POST http://localhost:3005/api/infodoctores/actualizar
+{
+    "idDoctor": 1,
+    "nombreC": "Juan",
+    "identificacion": "C:\\Users\\Juan\\Desktop\\identificacion.jpg",
+    "firma": "C:\\Users\\Juan\\Desktop\\firma.jpg",
+    "sexo": 1,
+    "fechaNac": "2020-01-01",
+    "foto": "C:\\Users\\Juan\\Desktop\\foto.jpg",
+    "especialidad": "Cardiologia",
+    "horario": "Matutino",
+    "precioCons": 100,
+    "direccionCons": "Calle falsa 123",
+    "Descripcion": "Especialista en cardiologia"
+}
+
+
+----------------------------------------------------------------------------
+
+
+*** INFORMACION PACIENTES ***
+POST http://localhost:3005/api/infopacientes
+CREAR:
+{
+    "idPaciente": 1,
+    "celular": 123456789,
+    "tipoSangre": "A+",
+    "sexo": 0,
+    "fechaNac": "2020-01-01",
+    "foto": "C:\\Users\\Juan\\Desktop\\foto.jpg",
+    "direccion": "Calle falsa 123",
+    "discapacidad": 0
+}
+
+OBTENER:
+GET http://localhost:3005/api/infopacientes
+{
+    "idPaciente": 1
+}
+
+ELIMINAR:
+DELETE http://localhost:3005/api/infopacientes
+{
+    "idPaciente": 1
+}
+
+ACTUALIZAR:
+POST http://localhost:3005/api/infopacientes/actualizar
+{
+    "idPaciente": 1,
+    "celular": 123456789,
+    "tipoSangre": "A+",
+    "sexo": 0,
+    "fechaNac": "2020-01-01",
+    "foto": "C:\\Users\\Juan\\Desktop\\foto.jpg",
+    "direccion": "Calle falsa 123",
+    "discapacidad": 0
+}
