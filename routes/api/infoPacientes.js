@@ -30,17 +30,13 @@ router.post("/", (req, res, next) => {
   }
   const info = {
     idPaciente: req.body.idPaciente,
-    nombreC: req.body.nombreC,
-    identificacion: req.body.identificacion,
-    firma: req.body.firma,
-    sexo: req.body.sexo,
-    fechaNac: req.body.fechaNac,
     foto: req.body.foto,
-    especialidad: req.body.especialidad,
-    horario: req.body.horario,
-    precioCons: req.body.precioCons,
-    direccionCons: req.body.direccionCons,
-    Descripcion: req.body.Descripcion,
+    celular: req.body.celular,
+    direccion: req.body.direccion,
+    fechaNac: req.body.fechaNac,
+    sexo: req.body.sexo,
+    discapacidad: req.body.discapacidad,
+    tipoSangre: req.body.tipoSangre
   };
   bd.models.infoPaciente
     .create(info)
@@ -67,7 +63,7 @@ router.get("/", (req, res, next) => {
         "direccion",
         "discapacidad",
       ],
-      where: { idDoctor: req.body.idPaciente },
+      where: { idPaciente: req.body.idPaciente },
     })
     .then((data) => {
       if (data === null) {
@@ -89,7 +85,7 @@ router.get("/", (req, res, next) => {
 router.delete("/", (req, res, next) => {
   bd.models.infoPaciente
     .destroy({
-      where: { id: req.body.idPaciente },
+      where: { idPaciente: req.body.idPaciente },
     })
     .then((data) => {
       if (data === null) {
@@ -119,7 +115,7 @@ router.post("/actualizar", (req, res, next) => {
         discapacidad: req.body.discapacidad,
       },
       {
-        where: { id: req.body.idPaciente },
+        where: { idPaciente: req.body.idPaciente },
       }
     )
     .then((data) => {

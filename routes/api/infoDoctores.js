@@ -94,7 +94,7 @@ router.get("/", (req, res, next) => {
 router.delete("/", (req, res, next) => {
   bd.models.infoDoctores
     .destroy({
-      where: { id: req.body.idDoctor },
+      where: { idDoctor: req.body.idDoctor },
     })
     .then((data) => {
       if (data === null) {
@@ -128,7 +128,7 @@ router.post("/actualizar", (req, res, next) => {
         Descripcion: req.body.Descripcion,
       },
       {
-        where: { id: req.body.idDoctor },
+        where: { idDoctor: req.body.idDoctor },
       }
     )
     .then((data) => {

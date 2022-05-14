@@ -36,7 +36,7 @@ router.get("/", (req, res, next) => {
   if (req.body.esDoctor) {
     bd.models.Consulta.findAll({
       raw: true,
-      attributes: ["id", "fecha", "hora", "link"],
+      attributes: ["id", "idPaciente", "fecha", "hora", "link"],
       where: { idDoctor: req.body.idDoctor },
     })
       .then((data) => {
@@ -56,7 +56,7 @@ router.get("/", (req, res, next) => {
   } else {
     bd.models.Consulta.findAll({
       raw: true,
-      attributes: ["id", "fecha", "hora", "link"],
+      attributes: ["id", "idDoctor", "fecha", "hora", "link"],
       where: { idPaciente: req.body.idPaciente },
     })
       .then((data) => {

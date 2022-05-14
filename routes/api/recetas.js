@@ -44,7 +44,7 @@ router.get("/", (req, res, next) => {
   if (req.body.esDoctor) {
     bd.models.Receta.findAll({
       raw: true,
-      attributes: ["id", "fecha", "prescripcion", "datos"],
+      attributes: ["id", "idPaciente", "fecha", "prescripcion", "datos"],
       where: { idDoctor: req.body.idDoctor },
     })
       .then((data) => {
@@ -64,7 +64,7 @@ router.get("/", (req, res, next) => {
   } else {
     bd.models.Receta.findAll({
       raw: true,
-      attributes: ["id", "fecha", "prescripcion", "datos"],
+      attributes: ["id", "idDoctor", "fecha", "prescripcion", "datos"],
       where: { idPaciente: req.body.idPaciente },
     })
       .then((data) => {
