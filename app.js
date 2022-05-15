@@ -20,7 +20,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 app.use(logger("dev"));
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost");
+  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5501");
   res.setHeader(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
   next();
 });
 const corsOptions = {
-  origin: "http://localhost",
+  origin: "http://127.0.0.1:5501",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
