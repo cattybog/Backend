@@ -52,7 +52,7 @@ router.post('/registro', (req, res, next) => {
 router.post('/login', (req, res, next) => {
     bd.models.Doctor.findOne({
         raw: true,
-        attributes: ['password'],
+        attributes: ['id', 'password'],
         where: {correo: req.body.correo ? req.body.correo : ""}
     }).then(data => {
         if (data === null) {
@@ -62,9 +62,11 @@ router.post('/login', (req, res, next) => {
         }
         bcrypt.compare(req.body.password, data.password, function (err, result) {
             if (result) {
-                // req.session.correo = req.body.correo;
-                // req.session.authenticated = true;
-                res.status(200).send();
+                req.session.correo = req.body.correo;
+                req.session.authenticated = true;
+                res.status(200).send({
+                    id: data.id
+                });
             } else {
                 res.status(402).send();
             }

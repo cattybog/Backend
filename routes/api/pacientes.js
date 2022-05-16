@@ -51,7 +51,7 @@ router.post('/registro', (req, res, next) => {
 router.post('/login', (req, res, next) => {
     bd.models.Paciente.findOne({
         raw: true,
-        attributes: ['password'],
+        attributes: ['id', 'password'],
         where: {correo: req.body.correo ? req.body.correo : ""}
     }).then(data => {
         if (data === null) {
@@ -63,7 +63,9 @@ router.post('/login', (req, res, next) => {
             if (result) {
                 req.session.correo = req.body.correo;
                 req.session.authenticated = true;
-                res.status(200).send();
+                res.status(200).send({
+                    id: data.id
+                });
             } else {
                 res.status(402).send();
             }
