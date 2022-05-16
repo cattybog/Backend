@@ -112,37 +112,41 @@ router.delete("/", (req, res, next) => {
 
 // ACTUALIZAR INFO
 router.post("/actualizar", (req, res, next) => {
+  var campos = {
+      nombreC: req.body.nombreC,
+      identificacion: req.body.identificacion,
+      firma: req.body.firma,
+      sexo: req.body.sexo,
+      fechaNac: req.body.fechaNac,
+      foto: req.body.foto,
+      especialidad: req.body.especialidad,
+      horario: req.body.horario,
+      precioCons: req.body.precioCons,
+      direccionCons: req.body.direccionCons,
+      Descripcion: req.body.Descripcion,
+  };
+  const campos_arr = Object.entries(campos);
+  const filtered = campos_arr.filter(([key, value]) => !(value === undefined));
+  const campos_ob = Object.fromEntries(filtered);
   bd.models.infoDoctores
-    .update(
-      {
-        nombreC: req.body.nombreC,
-        identificacion: req.body.identificacion,
-        firma: req.body.firma,
-        sexo: req.body.sexo,
-        fechaNac: req.body.fechaNac,
-        foto: req.body.foto,
-        especialidad: req.body.especialidad,
-        horario: req.body.horario,
-        precioCons: req.body.precioCons,
-        direccionCons: req.body.direccionCons,
-        Descripcion: req.body.Descripcion,
-      },
-      {
-        where: { idDoctor: req.body.idDoctor },
-      }
-    )
-    .then((data) => {
-      if (data === null) {
-        return res.status(401).send({
-          message: "Doctor no encontrado.",
-        });
-      }
-      res.status(200).send();
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send();
-    });
+      .update(
+          campos_ob,
+          {
+              where: { idDoctor: req.body.idDoctor },
+          }
+      )
+      .then((data) => {
+          if (data === null) {
+              return res.status(401).send({
+                  message: "Doctor no encontrado.",
+              });
+          }
+          res.status(200).send();
+      })
+      .catch((err) => {
+          console.log(err);
+          res.status(400).send();
+      });
 });
 
 module.exports = router;

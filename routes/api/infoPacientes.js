@@ -103,33 +103,37 @@ router.delete("/", (req, res, next) => {
 
 // ACTUALIZAR INFO
 router.post("/actualizar", (req, res, next) => {
+  var campos = {
+      celular: req.body.celular,
+      tipoSangre: req.body.tipoSangre,
+      sexo: req.body.sexo,
+      fechaNac: req.body.fechaNac,
+      foto: req.body.foto,
+      direccion: req.body.direccion,
+      discapacidad: req.body.discapacidad,
+  };
+  const campos_arr = Object.entries(campos);
+  const filtered = campos_arr.filter(([key, value]) => !(value === undefined));
+  const campos_ob = Object.fromEntries(filtered);
   bd.models.infoPaciente
-    .update(
-      {
-        celular: req.body.celular,
-        tipoSangre: req.body.tipoSangre,
-        sexo: req.body.sexo,
-        fechaNac: req.body.fechaNac,
-        foto: req.body.foto,
-        direccion: req.body.direccion,
-        discapacidad: req.body.discapacidad,
-      },
-      {
-        where: { idPaciente: req.body.idPaciente },
-      }
-    )
-    .then((data) => {
-      if (data === null) {
-        return res.status(401).send({
-          message: "Doctor no encontrado.",
-        });
-      }
-      res.status(200).send();
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send();
-    });
+      .update(
+          campos_ob,
+          {
+              where: { idPaciente: req.body.idPaciente },
+          }
+      )
+      .then((data) => {
+          if (data === null) {
+              return res.status(401).send({
+                  message: "Doctor no encontrado.",
+              });
+          }
+          res.status(200).send();
+      })
+      .catch((err) => {
+          console.log(err);
+          res.status(400).send();
+      });
 });
 
 module.exports = router;
