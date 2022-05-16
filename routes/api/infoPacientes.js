@@ -50,7 +50,7 @@ router.post("/", (req, res, next) => {
 });
 
 // OBTENER INFO
-router.get("/", (req, res, next) => {
+router.post("/get", (req, res, next) => {
   bd.models.infoPaciente
     .findAll({
       raw: true,

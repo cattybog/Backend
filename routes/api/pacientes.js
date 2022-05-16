@@ -47,6 +47,30 @@ router.post('/registro', (req, res, next) => {
 
 });
 
+router.post('/nombre', (req, res, next) => {
+    bd.models.Paciente.findOne({
+        raw: true,
+        attributes: ['nombre', 'correo'],
+        where: {id: req.body.idPaciente}
+    }).then(data => {
+        if (data === null) {
+            res.status(401).send({
+                message: "El usuario no existe."
+            });
+        } else {
+            res.status(200).json({
+                nombre: data.nombre,
+                correo: data.correo
+            });
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(400).send({
+            message: "Error al procesar la solicitud."
+        });
+    });
+});
+
 // OBTENER PACIENTE (LOGIN)
 router.post('/login', (req, res, next) => {
     bd.models.Paciente.findOne({
@@ -63,7 +87,7 @@ router.post('/login', (req, res, next) => {
             if (result) {
                 req.session.correo = req.body.correo;
                 req.session.authenticated = true;
-                res.status(200).send({
+                res.status(200).json({
                     id: data.id
                 });
             } else {
