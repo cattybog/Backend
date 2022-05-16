@@ -5,8 +5,9 @@ const cors = require("cors");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 // var bodyParser = require('body-parser');
-// var session = require('express-session');
+var session = require('express-session');
 var bd = require("./bd");
+var SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 var app = express();
 
@@ -42,9 +43,25 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+var myStore = new SequelizeStore({
+    db: bd.db
+});
+app.use(session({
+    secret: "d02425c564fbcc3a24fa78ccc2ea9b4d81e527b0b9a45c97a6f0f5be720628e1",
+    store: myStore,
+    secure: false,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24,
+        sameSite: 'lax'
+    },
+}));
+
+myStore.sync();
 
 // app.use(express.static(path.join(__dirname, "frontend", "TEConsultas")));
 // app.get("/*", (req, res) => {

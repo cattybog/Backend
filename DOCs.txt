@@ -1,4 +1,6 @@
 200: OPERACIÓN EXITOSA
+401: CORREO YA REGISTRADO
+402: TODOS LOS CAMPOS ESTAN VACIOS
 
 *** REGISTRO ***
 DOCTORES:
@@ -20,7 +22,8 @@ POST http://localhost:3005/api/pacientes/registro
 
 
 ----------------------------------------------------------------------------
-
+401: USUARIO NO ENCONTRADO
+402: CONTRASEÑA INCORRECTA
 
 *** LOGIN ***
 DOCTORES:
@@ -266,7 +269,7 @@ CREAR (solo se crea una vez):
     "nombreC": "Juan",
     "identificacion": "C:\\Users\\Juan\\Desktop\\identificacion.jpg",
     "firma": "C:\\Users\\Juan\\Desktop\\firma.jpg",
-    "sexo": 1,
+    "sexo": 1,   //1 es Femenino, 2 es Masculino
     "fechaNac": "2020-01-01",
     "foto": "C:\\Users\\Juan\\Desktop\\foto.jpg",
     "especialidad": "Cardiologia",

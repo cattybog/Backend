@@ -61,8 +61,8 @@ router.post('/login', (req, res, next) => {
         }
         bcrypt.compare(req.body.password, data.password, function (err, result) {
             if (result) {
-                // req.session.correo = req.body.correo;
-                // req.session.authenticated = true;
+                req.session.correo = req.body.correo;
+                req.session.authenticated = true;
                 res.status(200).send();
             } else {
                 res.status(402).send();
