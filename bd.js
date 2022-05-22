@@ -12,7 +12,6 @@ let models = initModels(db);
 //     .then(() => {
 //         console.log(`Database & tables created!`)
 //     });
-
 db.authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");

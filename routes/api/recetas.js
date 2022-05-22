@@ -10,7 +10,7 @@ const bd = require("../../bd");
 // };
 
 // CREAR RECETA
-router.post("/", (req, res, next) => {
+router.post("/crearReceta", (req, res, next) => {
   if (
     req.body.idPaciente === "" ||
     req.body.idDoctor === "" ||
@@ -40,11 +40,11 @@ router.post("/", (req, res, next) => {
 });
 
 // OBTENER RECETAS
-router.get("/", (req, res, next) => {
+router.post("/get", (req, res, next) => {
   if (req.body.esDoctor) {
     bd.models.Receta.findAll({
       raw: true,
-      attributes: ["id", "idPaciente", "fecha", "prescripcion", "datos"],
+      attributes: ["id", "idPaciente", "idDoctor", "fecha", "prescripcion", "datos"],
       where: { idDoctor: req.body.idDoctor },
     })
       .then((data) => {

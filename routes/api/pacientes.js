@@ -59,8 +59,7 @@ router.post('/nombre', (req, res, next) => {
             });
         } else {
             res.status(200).json({
-                nombre: data.nombre,
-                correo: data.correo
+                data
             });
         }
     }).catch(err => {
@@ -94,6 +93,30 @@ router.post('/login', (req, res, next) => {
                 res.status(402).send();
             }
         });
+    }).catch(err => {
+        console.log(err);
+        res.status(400).send({
+            message: "Error al procesar la solicitud."
+        });
+    });
+});
+
+//OBTENER INFO
+router.post('/todosPacientes', (req, res, next) => {
+    bd.models.Paciente.findAll({
+        raw: true,
+        attributes: ['id', 'nombre', 'correo',],
+        // where: {id: req.body.idDoctor}
+    }).then(data => {
+        if (data === null) {
+            res.status(401).send({
+                message: "El paciente no existe."
+            });
+        } else {
+            res.status(200).json({
+                data
+            });
+        }
     }).catch(err => {
         console.log(err);
         res.status(400).send({

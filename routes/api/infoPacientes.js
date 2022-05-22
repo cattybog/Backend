@@ -81,6 +81,31 @@ router.post("/get", (req, res, next) => {
     });
 });
 
+//OBTENER INFO
+router.post('/todosInfoPacientes', (req, res, next) => {
+    bd.models.Paciente.findAll({
+        raw: true,
+        attributes: ['idPaciente', 'foto', 'celular', 'direccion',
+         'fechaNac', 'sexo', 'discapacidad', 'tipoSangre'],
+        // where: {id: req.body.idDoctor}
+    }).then(data => {
+        if (data === null) {
+            res.status(401).send({
+                message: "El paciente no existe."
+            });
+        } else {
+            res.status(200).json({
+                data
+            });
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(400).send({
+            message: "Error al procesar la solicitud."
+        });
+    });
+});
+
 // ELIMINAR INFO
 router.delete("/", (req, res, next) => {
   bd.models.infoPaciente

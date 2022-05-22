@@ -32,11 +32,97 @@ router.post("/", (req, res, next) => {
 });
 
 // OBTENER CONSULTAS
-router.get("/", (req, res, next) => {
-  if (req.body.esDoctor) {
+router.post("/", (req, res, next) => {
+  if (true) {
     bd.models.Consulta.findAll({
       raw: true,
-      attributes: ["id", "idPaciente", "fecha", "hora", "link"],
+      attributes: ["id", "idPaciente", "idDoctor", "fecha", "hora", "link"],
+      where: { idDoctor: req.body.idDoctor },
+    })
+      .then((data) => {
+        if (data === null) {
+          return res.status(401).send({
+            message: "Consultas no encontradas.",
+          });
+        }
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send({
+          message: "Error al procesar la solicitud.",
+        });
+      });
+  } else {
+    bd.models.Consulta.findAll({
+      raw: true,
+      attributes: ["id", "idDoctor", "fecha", "hora", "link"],
+      where: { idPaciente: req.body.idPaciente },
+    })
+      .then((data) => {
+        if (data === null) {
+          return res.status(401).send({
+            message: "Consultas no encontradas.",
+          });
+        }
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send();
+      });
+  }
+});
+
+// OBTENER CONSULTAS PACIENTES
+router.post("/getAllConsultas", (req, res, next) => {
+  if (true) {
+    bd.models.Consulta.findAll({
+      raw: true,
+      attributes: ["id", "idPaciente", "idDoctor", "fecha", "hora", "link"],
+      where: { idPaciente: req.body.idPaciente },
+    })
+      .then((data) => {
+        if (data === null) {
+          return res.status(401).send({
+            message: "Consultas no encontradas.",
+          });
+        }
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send({
+          message: "Error al procesar la solicitud.",
+        });
+      });
+  } else {
+    bd.models.Consulta.findAll({
+      raw: true,
+      attributes: ["id", "idDoctor", "fecha", "hora", "link"],
+      where: { idPaciente: req.body.idPaciente },
+    })
+      .then((data) => {
+        if (data === null) {
+          return res.status(401).send({
+            message: "Consultas no encontradas.",
+          });
+        }
+        res.status(200).json(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).send();
+      });
+  }
+});
+
+// OBTENER CONSULTAS PACIENTES
+router.post("/getAllConsultasMedicos", (req, res, next) => {
+  if (true) {
+    bd.models.Consulta.findAll({
+      raw: true,
+      attributes: ["id", "idPaciente", "idDoctor", "fecha", "hora", "link"],
       where: { idDoctor: req.body.idDoctor },
     })
       .then((data) => {

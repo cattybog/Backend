@@ -55,7 +55,7 @@ router.post("/", (req, res, next) => {
 });
 
 // OBTENER INFO
-router.get("/", (req, res, next) => {
+router.post("/get", (req, res, next) => {
   bd.models.infoDoctores
     .findAll({
       raw: true,
@@ -87,6 +87,104 @@ router.get("/", (req, res, next) => {
       res.status(400).send({
         message: "Error al procesar la solicitud.",
       });
+    });
+});
+
+// OBTENER INFO
+router.post("/getAllConsultas", (req, res, next) => {
+  bd.models.infoDoctores
+    .findAll({
+      raw: true,
+      attributes: [
+        "nombreC",
+        "identificacion",
+        "firma",
+        "sexo",
+        "fechaNac",
+        "foto",
+        "especialidad",
+        "horario",
+        "precioCons",
+        "direccionCons",
+        "Descripcion",
+      ],
+      // where: { idDoctor: req.session.idDoctor },
+    })
+    .then((data) => {
+      if (data === null) {
+        return res.status(401).send({
+          message: "Información no encontrada.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send({
+        message: "Error al procesar la solicitud.",
+      });
+    });
+});
+
+// OBTENER INFO
+router.post("/getPorPaciente", (req, res, next) => {
+  bd.models.infoDoctores
+    .findAll({
+      raw: true,
+      attributes: [
+        "nombreC",
+        "identificacion",
+        "firma",
+        "sexo",
+        "fechaNac",
+        "foto",
+        "especialidad",
+        "horario",
+        "precioCons",
+        "direccionCons",
+        "Descripcion",
+      ],
+      where: { idDoctor: req.body.idDoctor },
+    })
+    .then((data) => {
+      if (data === null) {
+        return res.status(401).send({
+          message: "Información no encontrada.",
+        });
+      }
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send({
+        message: "Error al procesar la solicitud.",
+      });
+    });
+});
+
+//OBTENER INFO
+router.post('/todosInfoDoctores', (req, res, next) => {
+    bd.models.infoDoctores.findAll({
+        raw: true,
+        attributes: ['idDoctor','nombreC', 'identificacion', 'firma',
+        'sexo', 'fechaNac', 'foto', 'especialidad', 'horario', 'precioCons',
+        'direccionCons', 'Descripcion',],
+        // where: {}
+    }).then(data => {
+        if (data === null) {
+            res.status(401).send({
+                message: "El doctor no existe."
+            });
+        } else {
+            res.status(200).json({
+                data
+            });
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(400).send({
+            message: "Error al procesar la solicitud."
+        });
     });
 });
 
